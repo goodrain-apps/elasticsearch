@@ -39,7 +39,7 @@
 
 
 # 部署到本地
-## 拉取货构建镜像
+## 拉取或构建镜像
 ### 拉取镜像
 ```bash
 docker pull goodrain.io/elasticsearch:2.1_latest

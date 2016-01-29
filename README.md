@@ -42,48 +42,43 @@
 ## 拉取货构建镜像
 ### 拉取镜像
 ```bash
-docker pull goodrain.io/kibana:4.3_latest
+docker pull goodrain.io/elasticsearch:2.1_latest
+
 # rename tag
-docker tag -f goodrain.io/kibana:4.3_latest kibana
+docker tag -f goodrain.io/elasticsearch:2.1_latest kibana
 ```
 ### 构建镜像
 ```bash
-git clone https://github.com/goodrain-apps/kibana.git
-cd kibana/4.3
-docker build -t kibana  .
+git clone https://github.com/goodrain-apps/elasticsearch.git
+cd elasticsearch
+docker build -t elasticsearch  .
 ```
 ## 运行
-可以运行默认的 `kibana` 命令:
+可以运行默认的 `elasticsearch` 命令:
 ```bash
-$ docker run --link some-elasticsearch:elasticsearch -d kibana
+$ docker run -d elasticsearch
 ```
 
 
-也可以为 `kibana` 指定一个参数:
+也可以为 `elasticsearch` 命令指定一个参数:
 
 ```bash
-$ docker run --link some-elasticsearch:elasticsearch \
-              -d kibana \
-              --plugins /somewhere/else
+$ docker run -d elasticsearch elasticsearch -Des.node.name="TestNode"
 ```
 
-这个镜像包含 `EXPOSE 5601` [会暴露这个默认端口](https://www.elastic.co/guide/en/kibana/current/_setting_kibana_server_properties.html)。如果想通过宿主机IP访问到这个端口，必须在启动时指定端口映射：
+这个镜像会有一个默认的配置文件，如果你想使用自己的配置文件，可以通过挂载到 `/usr/share/elasticsearch/config` 目录来实现：
 
 ```bash
-$ docker run --name some-kibana \
-             --link some-elasticsearch:elasticsearch \
-             -p 5601:5601 -d kibana
+$ docker run -d -v "$PWD/config":/usr/share/elasticsearch/config elasticsearch
 ```
 
-也可以通过 `ELASTICSEARCH_URL` 环境变量来指定 elasticsearch 的地址：
+这个镜像将 `/usr/share/elasticsearch/data` 作为持久化索引数据的目录，你可以将宿主机的一个目录挂载到容器内实现索引数据持久化的目的：
 
 ```bash
-$ docker run --name some-kibana \
-             -e ELASTICSEARCH_URL=http://some-elasticsearch:9200 \
-             -p 5601:5601 -d kibana
+$ docker run -d -v "$PWD/esdata":/usr/share/elasticsearch/data elasticsearch
 ```
 
-最后，可以在浏览器中访问 `http://localhost:5601` 或者 `http://host-ip:5601` 
+这个镜像会暴露9200和 9300端口( EXPOSE 9200 9300 ) ([default `http.port`](http://www.elastic.co/guide/en/elasticsearch/reference/1.5/modules-http.html))，因此使用容器连接的形式将会自动识别。
 
 # 支持的Docker版本
 该镜像支持  Docker 1.9.1 版本，最低支持到 1.6
@@ -93,13 +88,13 @@ $ docker run --name some-kibana \
 # 用户反馈
 ## 相关文档
 
-- [kibana 4.3 镜像说明文档](https://github.com/goodrain-apps/kibana/blob/master/Readme.md)
-- [kibana 中文文档](http://kibana.logstash.es/content/kibana/index.html)
+- [Elasticsearch 2.1 镜像说明文档](https://github.com/goodrain-apps/elasticsearch/blob/master/README.md)
+- [Elasticsearch 中文文档](https://www.gitbook.com/book/looly/elasticsearch-the-definitive-guide-cn)
 
 
 ## 问题讨论
-- [GitHub issue](https://github.com/goodrain-apps/kibana/issues)
-- [kibana 好雨云社区讨论](http://t.goodrain.com/t/kibana/123)
+- [GitHub issue](https://github.com/goodrain-apps/elasticsearch/issues)
+- [kibana 好雨云社区讨论]()
 
 ## 参与项目
 如果你觉得这个镜像很有用或者愿意共同改进项目，可以通过如下形式参与：
@@ -108,4 +103,4 @@ $ docker run --name some-kibana \
 
 # 版权说明
 
-- 官方 [ 版权信息 ](https://github.com/elastic/kibana/blob/4557a6fc0ba08c5e7ac813a180179e5e2631c90a/LICENSE.md) 同样适用于本镜像
+- 官方 [ 版权信息 ](https://github.com/elasticsearch/elasticsearch/blob/66b5ed86f7adede8102cd4d979b9f4924e5bd837/LICENSE.txt) 同样适用于本镜像

@@ -94,7 +94,7 @@ $ docker run -d -v "$PWD/esdata":/usr/share/elasticsearch/data elasticsearch
 
 ## 问题讨论
 - [GitHub issue](https://github.com/goodrain-apps/elasticsearch/issues)
-- [kibana 好雨云社区讨论]()
+- [kibana 好雨云社区讨论](http://t.goodrain.com/t/elasticsearch/124)
 
 ## 参与项目
 如果你觉得这个镜像很有用或者愿意共同改进项目，可以通过如下形式参与：

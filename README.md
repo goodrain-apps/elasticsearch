@@ -33,7 +33,7 @@
 
 **注意：**
 
-- Kibana 应用依赖 Elasticsearch 和 Logstash 应用，因此在安装 Kibana 时会自动安装其它两个依赖的应用
+- Elasticsearch 应用依赖 Kibana 和 Logstash 应用，因此在安装 Elasticsearch 时会自动安装其它两个依赖的应用
 - 需要日志处理的应用请在 依赖服务 中关联 logstash 应用，应用与logstash可以是一对一的关系，也可以是多对一的关系，还可以是多对多的关系。
 - Elasticsearch 目前是单个实例，集群模式后续更新
 

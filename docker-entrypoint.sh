@@ -8,6 +8,16 @@ ESCONFIG="elasticsearch.yml"
 ESLOGCONFIG="logging.yml"
 RETRY=" -s --connect-timeout 3 --max-time 3  --retry 5 --retry-delay 0 --retry-max-time 10 "
 
+# 初始化创建目录
+if [ ! -d /data/data ] && [ ! -d /data/logs ] && [ ! -d /data/config ];then
+  for path in /data/data /data/logs /data/config /data/config/scripts
+  do 
+    mkdir -p "$path"
+    chown -R elasticsearch:elasticsearch "$path"
+  done
+fi
+
+
 # 获取配置文件 
 if [ "$MEMORY_SIZE" == "" ];then
   echo "Must set MEMORY_SIZE environment variable! "
@@ -21,17 +31,6 @@ else
     exit 1
   fi
 fi
-
-
-# 初始化创建目录
-if [ ! -d /data/data ] && [ ! -d /data/logs ] && [ ! -d /data/config ];then
-  for path in /data/data /data/logs /data/config /data/config/scripts
-  do 
-    mkdir -p "$path"
-    chown -R elasticsearch:elasticsearch "$path"
-  done
-fi
-
 
 # 软连接 config 目录到 ES_HOME
 if [ ! -d /usr/share/elasticsearch/config ];then

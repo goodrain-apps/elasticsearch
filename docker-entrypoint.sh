@@ -5,6 +5,8 @@ set -x
 CONFDIR="/data/config"
 ESLOGCONFIG="logging.yml"
 ESCONFIG="elasticsearch.yml"
+HOST_IP=`ip a | grep eth1 | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}'`
+export HOST_IP
 
 # 初始化创建目录
 for path in /data/data /data/logs /data/config /data/config/scripts

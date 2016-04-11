@@ -29,6 +29,10 @@ if [[ $SERVICE_EXTEND_METHOD = "state-expend" ]];then
     fi
 fi
 
+# 处理 elasticsearch 配置文件
+cp /tmp/${ESCONFIG}  ${CONFDIR}/${POD_ORDER}/${ESCONFIG}
+cp /tmp/${ESLOGCONFIG} ${CONFDIR}/${POD_ORDER}/${ESLOGCONFIG}
+
 # 软连接 config 目录到 ES_HOME
 if [ ! -d /usr/share/elasticsearch/config ];then
   ln -s /data/config /usr/share/elasticsearch/

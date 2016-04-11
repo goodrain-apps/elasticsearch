@@ -35,7 +35,7 @@ cp /tmp/${ESLOGCONFIG} ${CONFDIR}/${POD_ORDER}/${ESLOGCONFIG}
 
 # 软连接 config 目录到 ES_HOME
 if [ ! -d /usr/share/elasticsearch/config ];then
-  ln -s /data/config /usr/share/elasticsearch/
+  ln -s /data/config/${POD_ORDER} /usr/share/elasticsearch/config
 fi
 
 # Add elasticsearch as command if needed

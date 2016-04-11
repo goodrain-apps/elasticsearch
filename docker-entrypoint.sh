@@ -3,33 +3,29 @@
 set -x
 
 CONFDIR="/data/config"
-CONFURI="http://config.goodrain.me/apps/elasticsearch"
-ESCONFIG="elasticsearch.yml"
 ESLOGCONFIG="logging.yml"
-RETRY=" -s --connect-timeout 3 --max-time 3  --retry 5 --retry-delay 0 --retry-max-time 10 "
 
 # 初始化创建目录
-if [ ! -d /data/data ] && [ ! -d /data/logs ] && [ ! -d /data/config ];then
-  for path in /data/data /data/logs /data/config /data/config/scripts
-  do 
-    mkdir -p "$path"
-    chown -R elasticsearch:elasticsearch "$path"
-  done
-fi
+for path in /data/data /data/logs /data/config /data/config/scripts
+do 
+    [ ! -d $path/$POD_ORDER ] && mkdir -pv $path/$POD_ORDER
+    chown -R elasticsearch:elasticsearch $path
+done
 
 
-# 获取配置文件 
-if [ "$MEMORY_SIZE" == "" ];then
-  echo "Must set MEMORY_SIZE environment variable! "
-  exit 1
-else
-  echo "memory type:$MEMORY_SIZE"
-  curl $RETRY ${CONFURI}/${MEMORY_SIZE}_${ESCONFIG} -o ${CONFDIR}/${ESCONFIG} && \
-  curl $RETRY ${CONFURI}/${ESLOGCONFIG} -o ${CONFDIR}/${ESLOGCONFIG}
-  if [ $? -ne 0 ];then
-    echo "get ${MEMORY_SIZE} config error!"
-    exit 1
-  fi
+# 创建持久化目录
+if [[ $SERVICE_EXTEND_METHOD = "state-expend" ]];then
+    if [[ $POD_ORDER != "" ]];then
+        action=${POD_ORDER:0:1}
+        pod_order=${POD_ORDER:1}
+        
+        if [[ $action = "b" ]];then
+            rm -rf /data/$pod_order
+	fi
+	
+	mkdir -pv /data/$pod_order
+	chown elasticsearch.elasticsearch /data/ -R
+    fi
 fi
 
 # 软连接 config 目录到 ES_HOME

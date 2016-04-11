@@ -17,4 +17,4 @@ path:
   
 # --------------------------------- Discovery ----------------------------------
 discovery.zen.minimum_master_nodes: 1
-  
+discovery.zen.ping.multicast.enabled: true

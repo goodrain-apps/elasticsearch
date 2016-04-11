@@ -4,6 +4,7 @@ set -x
 
 CONFDIR="/data/config"
 ESLOGCONFIG="logging.yml"
+ESCONFIG="elasticsearch.yml"
 
 # 初始化创建目录
 for path in /data/data /data/logs /data/config /data/config/scripts

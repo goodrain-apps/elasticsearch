@@ -40,6 +40,9 @@ if [ ! -d /usr/share/elasticsearch/config ];then
   ln -s /data/config/${POD_ORDER} /usr/share/elasticsearch/config
 fi
 
+# install discovery-multicast plugin
+/usr/share/elasticsearch/bin/plugin install discovery-multicast
+
 # Add elasticsearch as command if needed
 if [ "${1:0:1}" = '-' ]; then
 	set -- elasticsearch "$@"

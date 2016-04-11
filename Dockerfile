@@ -28,7 +28,7 @@ ENV PATH /usr/share/elasticsearch/bin:$PATH
 VOLUME /data
 
 # copy elasticsearch config  to /tmp
-COPY *.yml /tmp/
+COPY config/*.yml /tmp/
 
 # 修改java运行参数
 COPY usr/share/elasticsearch/bin/elasticsearch.in.sh /usr/share/elasticsearch/bin/

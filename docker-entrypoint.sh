@@ -9,7 +9,6 @@ HOST_IP=`ip a | grep eth1 | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[
 export HOST_IP
 
 # set environment
-export CLUSTER_NAME=${CLUSTER_NAME:-elasticsearch-default}
 export NODE_MASTER=${NODE_MASTER:-true}
 export NODE_DATA=${NODE_DATA:-true}
 export HTTP_ENABLE=${HTTP_ENABLE:-true}

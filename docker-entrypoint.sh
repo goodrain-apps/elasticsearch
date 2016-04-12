@@ -30,11 +30,11 @@ if [[ $SERVICE_EXTEND_METHOD = "state-expend" ]];then
         pod_order=${POD_ORDER:1}
         
         if [[ $action = "b" ]];then
-            rm -rf /data/$pod_order
+            for dir in data config logs plugins
+            do
+              rm -rf /data/${dir}/${pod_order}
+            done
 	fi
-	
-	mkdir -pv /data/$pod_order
-	chown rain.rain /data/ -R
     fi
 fi
 

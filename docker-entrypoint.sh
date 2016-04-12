@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -x
+[ $DEBUG ] && set -x
 
 CONFDIR="/data/config"
 ESLOGCONFIG="logging.yml"

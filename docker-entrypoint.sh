@@ -38,17 +38,19 @@ if [[ $SERVICE_EXTEND_METHOD = "state-expend" ]];then
     fi
 fi
 
+# install discovery-multicast plugin
+cp /tmp/tmp_elasticsearch.yml /elasticsearch/config
+/elasticsearch/bin/plugin install discovery-multicast
+
 # 处理 elasticsearch 配置文件
 cp /tmp/${ESCONFIG}  ${CONFDIR}/${POD_ORDER}/${ESCONFIG}
 cp /tmp/${ESLOGCONFIG} ${CONFDIR}/${POD_ORDER}/${ESLOGCONFIG}
 
 # 软连接 config 目录到 ES_HOME
-if [ ! -d /elasticsearch/config ];then
+if [ -d /elasticsearch/config ];then
+  rm -rf /elasticsearch/config
   ln -s /data/config/${POD_ORDER} /elasticsearch/config
 fi
-
-# install discovery-multicast plugin
-/elasticsearch/bin/plugin install discovery-multicast
 
 # Add elasticsearch as command if needed
 if [ "${1:0:1}" = '-' ]; then

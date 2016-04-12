@@ -1,7 +1,8 @@
 FROM goodrain.me/jre:8u77
 MAINTAINER zhouyq@goodrain.com
 
-ENV ES_VERSION 2.3.1
+ENV ES_VERSION   2.3.1
+ENV GOSU_VERSION 1.7
 
 # Install Elasticsearch.
 RUN apk add  --no-cache curl && \
@@ -13,7 +14,7 @@ RUN apk add  --no-cache curl && \
 ENV PATH /elasticsearch/bin:$PATH
 
 RUN set -x \
-	&& curl -o /usr/local/bin/gosu -fSsL "https://github.com/tianon/gosu/releases/download/1.3/gosu-amd64" \
+	&& curl -o /usr/local/bin/gosu -fSsL "https://github.com/tianon/gosu/releases/download/${GOSU_VERSION}/gosu-amd64" \
 	&& chmod +x /usr/local/bin/gosu
 
 # Volume for Elasticsearch data

@@ -38,6 +38,11 @@ if [[ $SERVICE_EXTEND_METHOD = "state-expend" ]];then
     fi
 fi
 
+# process plugins dir
+[ -d /elasticsearch/plugins ] \
+&& rm -rf /elasticsearch/plugins \
+|| ln -s /data/plugins/${POD_ORDER} /elasticsearch/plugins
+
 # install discovery-multicast plugin
 cp /tmp/tmp_elasticsearch.yml /elasticsearch/config/
 /elasticsearch/bin/plugin install discovery-multicast

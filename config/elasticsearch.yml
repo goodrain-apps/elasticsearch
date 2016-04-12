@@ -14,7 +14,7 @@ node:
   data: ${NODE_DATA}
 
 # bootstrap
-bootstrap.mlockall: true
+# bootstrap.mlockall: true
 
 # http
 http:
@@ -32,3 +32,4 @@ path:
 # Discovery
 discovery.zen.minimum_master_nodes: 1
 discovery.zen.ping.multicast.enabled: ${MULTICAST}
+#discovery.zen.ping.unicast.hosts: []

@@ -28,47 +28,38 @@ case ${MEMORY_SIZE:-small} in
     "micro")
        export ES_MIN_MEM="128m" ES_MAX_MEM="128m"
        echo "Optimizing java process for 128M Memory...."
-       ulimit -l 131072
        ;;
     "small")
        export ES_MIN_MEM="256m" ES_MAX_MEM="256m"
        echo "Optimizing java process for 256M Memory...."
-       ulimit -l 262144
        ;;
     "medium")
        export ES_MIN_MEM="512m" ES_MAX_MEM="512m -XX:NewSize=64m -XX:PermSize=64m"
        echo "Optimizing java process for 512M Memory...."
-       ulimit -l 524288
        ;;
     "large")
        export ES_MIN_MEM="1024m" ES_MAX_MEM="1024m -XX:NewSize=128m -XX:PermSize=128m"
        echo "Optimizing java process for 1G Memory...."
-       ulimit -l 1048576
        ;;
     "2xlarge")
        export ES_MIN_MEM="2048m" ES_MAX_MEM="2048m -XX:NewSize=256m -XX:PermSize=128m"
        echo "Optimizing java process for 2G Memory...."
-       ulimit -l 2097152
        ;;
     "4xlarge")
        export ES_MIN_MEM="4096m" ES_MAX_MEM="4096m -XX:NewSize=512m -XX:PermSize=256m"
        echo "Optimizing java process for 4G Memory...."
-       ulimit -l 4194304
        ;;
     "8xlarge")
        export ES_MIN_MEM="8192m" ES_MAX_MEM="8192m -XX:NewSize=1024m -XX:PermSize=512m"
        echo "Optimizing java process for 8G Memory...."
-       ulimit -l 8388608
        ;;
     16xlarge|32xlarge|64xlarge)
        export ES_MIN_MEM="10240m"  ES_MAX_MEM="10240m -XX:NewSize=2048m -XX:PermSize=1024m"
        echo "Optimizing java process for biger Memory...."
-       ulimit -l 16777216
        ;;
     *)
        export ES_MIN_MEM="256m" ES_MAX_MEM="256m"
        echo "Optimizing java process for 256M Memory...."
-       ulimit -l 262144
        ;;
 esac
 

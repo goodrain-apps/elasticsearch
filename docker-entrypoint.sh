@@ -46,7 +46,7 @@ fi
 # install discovery-multicast plugin
 installed=`/elasticsearch/bin/plugin list | grep discovery-multicast`
 [ ! "$installed" ] && cp /tmp/tmp_elasticsearch.yml /elasticsearch/config/ && \
-/elasticsearch/bin/plugin install discovery-multicast
+gosu rain /elasticsearch/bin/plugin install discovery-multicast
 
 # 处理 elasticsearch 配置文件
 cp /tmp/${ESCONFIG}  ${CONFDIR}/${POD_ORDER}/${ESCONFIG}

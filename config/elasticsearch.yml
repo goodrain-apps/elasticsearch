@@ -1,31 +1,31 @@
-# ----------- Cluster --------------
+# Cluster
 cluster.name: ${SERVICE_NAME}
 
 
-# ------------ Network -------------
+# Network
 network.host: ${HOST_IP}
 
 http.port: 9200
 
-# -------------- Node --------------
+# Node
 node:
   name: ${POD_ORDER}
   master: ${NODE_MASTER}
   data: ${NODE_DATA}
 
-# -------------- http --------------
+# http
 http:
   enabled: ${HTTP_ENABLE}
   compression: true
   cors:
     enabled: true
 
-# -------------- Paths -------------
+# Paths
 path:
   logs: /data/logs/${POD_ORDER}
   data: /data/data/${POD_ORDER}
   plugins: /data/plugins/${POD_ORDER}
   
-# ------------- Discovery -----------
+# Discovery
 discovery.zen.minimum_master_nodes: 1
 discovery.zen.ping.multicast.enabled: ${MULTICAST}

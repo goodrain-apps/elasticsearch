@@ -5,7 +5,7 @@ ENV ES_VERSION 2.3.1
 
 # Install Elasticsearch.
 RUN curl -Lskj https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/$ES_VERSION/elasticsearch-$ES_VERSION.tar.gz | \
-  tar xfC - ) && \
+  tar -xzC / && \
   mv /elasticsearch-$ES_VERSION /elasticsearch && \
   rm -rf $(find /elasticsearch | egrep "(\.(exe|bat)$|sigar/.*(dll|winnt|x86-linux|solaris|ia64|freebsd|macosx))")
 

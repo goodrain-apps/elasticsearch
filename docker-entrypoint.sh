@@ -16,10 +16,11 @@ export HTTP_ENABLE=${HTTP_ENABLE:-true}
 export MULTICAST=${MULTICAST:-true}
 
 # 初始化创建目录
-for path in /data/data /data/logs /data/config /data/config/scripts
+for path in data logs config plugins config/scripts
 do 
-    [ ! -d $path/$POD_ORDER ] && mkdir -pv $path/$POD_ORDER
-    chown -R rain:rain $path
+    [ ! -d /data/$path/$POD_ORDER ] && \
+    mkdir -pv /data/$path/$POD_ORDER && \
+    chown -R rain:rain /data/$path
 done
 
 
@@ -39,7 +40,7 @@ if [[ $SERVICE_EXTEND_METHOD = "state-expend" ]];then
 fi
 
 # install discovery-multicast plugin
-cp /tmp/tmp_elasticsearch.yml /elasticsearch/config
+cp /tmp/tmp_elasticsearch.yml /elasticsearch/config/
 /elasticsearch/bin/plugin install discovery-multicast
 
 # 处理 elasticsearch 配置文件

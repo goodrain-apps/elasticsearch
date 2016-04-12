@@ -13,7 +13,7 @@ RUN apk add  --no-cache curl && \
 ENV PATH /elasticsearch/bin:$PATH
 
 RUN set -x \
-	&& curl -o /usr/local/bin/gosu -fSL "https://github.com/tianon/gosu/releases/download/1.3/gosu-amd64" \
+	&& curl -o /usr/local/bin/gosu -fSsL "https://github.com/tianon/gosu/releases/download/1.3/gosu-amd64" \
 	&& chmod +x /usr/local/bin/gosu
 
 # Volume for Elasticsearch data

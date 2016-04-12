@@ -58,6 +58,9 @@ if [ -d /elasticsearch/config ];then
   ln -s /data/config/${POD_ORDER} /elasticsearch/config
 fi
 
+# allow for memlock
+ulimit -l unlimited
+
 # Add elasticsearch as command if needed
 if [ "${1:0:1}" = '-' ]; then
 	set -- elasticsearch "$@"

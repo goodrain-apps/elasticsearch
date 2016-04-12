@@ -19,7 +19,7 @@ export MULTICAST=${MULTICAST:-true}
 for path in /data/data /data/logs /data/config /data/config/scripts
 do 
     [ ! -d $path/$POD_ORDER ] && mkdir -pv $path/$POD_ORDER
-    chown -R elasticsearch:elasticsearch $path
+    chown -R rain:rain $path
 done
 
 
@@ -34,7 +34,7 @@ if [[ $SERVICE_EXTEND_METHOD = "state-expend" ]];then
 	fi
 	
 	mkdir -pv /data/$pod_order
-	chown elasticsearch.elasticsearch /data/ -R
+	chown rain.rain /data/ -R
     fi
 fi
 
@@ -43,12 +43,12 @@ cp /tmp/${ESCONFIG}  ${CONFDIR}/${POD_ORDER}/${ESCONFIG}
 cp /tmp/${ESLOGCONFIG} ${CONFDIR}/${POD_ORDER}/${ESLOGCONFIG}
 
 # 软连接 config 目录到 ES_HOME
-if [ ! -d /usr/share/elasticsearch/config ];then
-  ln -s /data/config/${POD_ORDER} /usr/share/elasticsearch/config
+if [ ! -d /elasticsearch/config ];then
+  ln -s /data/config/${POD_ORDER} /elasticsearch/config
 fi
 
 # install discovery-multicast plugin
-/usr/share/elasticsearch/bin/plugin install discovery-multicast
+/elasticsearch/bin/plugin install discovery-multicast
 
 # Add elasticsearch as command if needed
 if [ "${1:0:1}" = '-' ]; then
@@ -58,8 +58,8 @@ fi
 # Drop root privileges if we are running elasticsearch
 if [ "$1" = 'elasticsearch' ]; then
 	# Change the ownership of /usr/share/elasticsearch/data to elasticsearch
-	chown -R elasticsearch:elasticsearch /data/data
-	exec gosu elasticsearch "$@"
+	chown -R rain.rain /data/data
+	exec gosu rain "$@"
 fi
 
 # As argument is not related to elasticsearch,

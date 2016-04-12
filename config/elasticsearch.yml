@@ -13,6 +13,9 @@ node:
   master: ${NODE_MASTER}
   data: ${NODE_DATA}
 
+# bootstrap
+bootstrap.mlockall: true
+
 # http
 http:
   enabled: ${HTTP_ENABLE}

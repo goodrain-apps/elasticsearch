@@ -70,7 +70,10 @@ if [ "$1" = 'elasticsearch' ]; then
 	exec gosu rain "$@"
 fi
 
-# As argument is not related to elasticsearch,
-# then assume that user wants to run his own process,
-# for example a `bash` shell to explore this image
-exec "$@"
+# cluster discovrery and modify elasticsearch.yml
+NodeNetPlugin -url=http://172.30.42.1:8080/api/v1/namespaces/${TENANT_ID}/endpoints/ \
+-regx_label=elasticsearch \
+-regx_port=9300  \
+-v=4 \
+-logtostderr=true \
+-rec_cmd=/elasticsearch/bin/config.sh

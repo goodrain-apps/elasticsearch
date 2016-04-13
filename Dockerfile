@@ -33,4 +33,4 @@ ENTRYPOINT ["/docker-entrypoint.sh"]
 
 EXPOSE 9200 9300
 
-CMD ["elasticsearch -d"]
+CMD ["elasticsearch"]

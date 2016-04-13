@@ -58,6 +58,16 @@ if [ -d /elasticsearch/config ];then
   ln -s /data/config/${POD_ORDER} /elasticsearch/config
 fi
 
+# cluster discovrery and modify elasticsearch.yml
+NodeNetPlugin -url=http://172.30.42.1:8080/api/v1/namespaces/${TENANT_ID}/endpoints/ \
+-regx_label=elasticsearch \
+-frequency=once \
+-regx_port=9300 \
+-v=4 \
+-logtostderr=true \
+-rec_cmd=/elasticsearch/bin/config.sh
+
+
 # Add elasticsearch as command if needed
 if [ "${1:0:1}" = '-' ]; then
 	set -- elasticsearch "$@"
@@ -70,10 +80,4 @@ if [ "$1" = 'elasticsearch' ]; then
 	exec gosu rain "$@"
 fi
 
-# cluster discovrery and modify elasticsearch.yml
-NodeNetPlugin -url=http://172.30.42.1:8080/api/v1/namespaces/${TENANT_ID}/endpoints/ \
--regx_label=elasticsearch \
--regx_port=9300  \
--v=4 \
--logtostderr=true \
--rec_cmd=/elasticsearch/bin/config.sh
+exec "$@"

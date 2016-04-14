@@ -65,6 +65,8 @@ fi
 NodeNetPlugin -url=http://172.30.42.1:8080/api/v1/namespaces/${TENANT_ID}/endpoints/ \
 -regx_label=${SERVICE_NAME} \
 -frequency=once \
+-exec_num=3 \
+-interval=10 \
 -regx_port=9300 \
 -v=4 \
 -logtostderr=true \

@@ -60,7 +60,7 @@ fi
 
 # cluster discovrery and modify elasticsearch.yml
 if [ "$NODE_DATA" == "true" ];then
-  SERVICE_NAME=${DEPEND_SERVICE:-$SERVICE_NAME}
+  SERVICE_NAME=${MASTER_SERVICE:-$SERVICE_NAME}
 fi
 NodeNetPlugin -url=http://172.30.42.1:8080/api/v1/namespaces/${TENANT_ID}/endpoints/ \
 -regx_label=${SERVICE_NAME} \

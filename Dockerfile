@@ -2,7 +2,7 @@ FROM goodrain.me/jre:8u77
 MAINTAINER zhouyq@goodrain.com
 
 ENV ES_VERSION      2.3.1
-ENV NODENET_VERSION 0.1
+ENV NODENET_VERSION 0.2
 
 # Install Elasticsearch.
 RUN apk add  --no-cache curl && \

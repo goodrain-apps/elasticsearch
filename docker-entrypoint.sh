@@ -58,20 +58,21 @@ if [ -d /elasticsearch/config ];then
   ln -s /data/config/${POD_ORDER} /elasticsearch/config
 fi
 
-# cluster discovrery and modify elasticsearch.yml
-if [ "$NODE_DATA" == "true" ];then
-  SERVICE_NAME=${MASTER_SERVICE:-$SERVICE_NAME}
+# 单播的集群发现模式
+if [ "$MULTICAST" != "true" ];then
+    if [ "$NODE_DATA" == "true" ];then
+        SERVICE_NAME=${MASTER_SERVICE:-$SERVICE_NAME}
+    fi
+    NodeNetPlugin -url=http://172.30.42.1:8080/api/v1/namespaces/${TENANT_ID}/endpoints/ \
+    -regx_label=${SERVICE_NAME} \
+    -frequency=once \
+    -exec_num=3 \
+    -interval=10 \
+    -regx_port=9300 \
+    -v=4 \
+    -logtostderr=true \
+    -rec_cmd=/elasticsearch/bin/config.sh
 fi
-NodeNetPlugin -url=http://172.30.42.1:8080/api/v1/namespaces/${TENANT_ID}/endpoints/ \
--regx_label=${SERVICE_NAME} \
--frequency=once \
--exec_num=3 \
--interval=10 \
--regx_port=9300 \
--v=4 \
--logtostderr=true \
--rec_cmd=/elasticsearch/bin/config.sh
-
 
 # Add elasticsearch as command if needed
 if [ "${1:0:1}" = '-' ]; then

@@ -1,4 +1,4 @@
-# dockerfile for elasticsearch:2.1
+# dockerfile for elasticsearch:2.3.1
 
 
 > Elasticsearch是一个实时分布式搜索和分析引擎。它让你以前所未有的速度处理大数据成为可能。

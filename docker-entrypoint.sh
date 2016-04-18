@@ -5,10 +5,10 @@
 CONFDIR="/data/config"
 ESLOGCONFIG="logging.yml"
 ESCONFIG="elasticsearch.yml"
-HOST_IP=`ip a | grep eth1 | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}'`
+HOST_IP=$(ip -o -4 addr list eth1 | awk '{print $4}' | cut -d/ -f1)
 export HOST_IP
 
-INTER_IP=`ip a | egrep 'eth0' | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}'`
+INTER_IP=$(ip -o -4 addr list eth0 | awk '{print $4}' | cut -d/ -f1)
 MULIT_IP="[\"$HOST_IP\", \"$INTER_IP\"]"
 export MULIT_IP
 
@@ -17,6 +17,7 @@ export NODE_MASTER=${NODE_MASTER:-true}
 export NODE_DATA=${NODE_DATA:-true}
 export HTTP_ENABLE=${HTTP_ENABLE:-true}
 export MULTICAST=${MULTICAST:-true}
+export LOG_LEVEL=${LOG_LEVEL:-1}
 
 # 初始化创建目录
 for path in data logs config plugins config/scripts
@@ -72,7 +73,7 @@ if [ "$MULTICAST" != "true" ];then
        -exec_num=3 \
        -interval=10 \
        -regx_port=9300 \
-       -v=4 \
+       -v=${LOG_LEVEL} \
        -logtostderr=true \
        -rec_cmd=/elasticsearch/bin/config.sh
 fi

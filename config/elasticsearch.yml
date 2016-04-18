@@ -4,6 +4,8 @@ cluster.name: ${SERVICE_NAME}
 
 # Network
 network.host: _site_
+network.publish_host: ${HOST_IP}
+transport.publish_host: ${HOST_IP}
 
 http.port: 9200
 

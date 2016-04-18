@@ -3,7 +3,7 @@ cluster.name: ${SERVICE_NAME}
 
 
 # Network
-network.host: ${MULIT_IP}
+network.host: _site_
 
 http.port: 9200
 

@@ -3,7 +3,8 @@ cluster.name: ${SERVICE_NAME}
 
 
 # Network
-network.host: 0.0.0.0
+http.bind_host: 0.0.0.0
+http.publish_host: ${HOST_IP}
 
 http.port: 9200
 

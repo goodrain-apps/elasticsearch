@@ -3,7 +3,7 @@ cluster.name: ${SERVICE_NAME}
 
 
 # Network
-network.host: _site_
+network.host: ${MULIT_IP}
 network.publish_host: ${HOST_IP}
 transport.publish_host: ${HOST_IP}
 

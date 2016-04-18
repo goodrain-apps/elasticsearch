@@ -78,7 +78,7 @@ if [ "$MULTICAST" != "true" ];then
        -rec_cmd=/elasticsearch/bin/config.sh
 fi
 
-#sed -i -r "s/(network.host:) .*/\1 $MULIT_IP/" ${CONFDIR}/${POD_ORDER}/${ESCONFIG}
+sed -i -r "s/(network.host:) .*/\1 $MULIT_IP/" ${CONFDIR}/${POD_ORDER}/${ESCONFIG}
 #sed -i -r "s/(transport.bind_host:) .*/\1 $HOST_IP/" ${CONFDIR}/${POD_ORDER}/${ESCONFIG}
 
 # Add elasticsearch as command if needed

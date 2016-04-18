@@ -62,8 +62,8 @@ fi
 if [ "$MULTICAST" != "true" ];then
     if [ "$NODE_DATA" == "true" ];then
        [ $DEPEND_SERVICE ] && SERVICE_NAME=${DEPEND_SERVICE%:*} || exit 1
-    
-       NodeNetPlugin -url=http://172.30.42.1:8080/api/v1/namespaces/${TENANT_ID}/endpoints/ \
+    fi
+	NodeNetPlugin -url=http://172.30.42.1:8080/api/v1/namespaces/${TENANT_ID}/endpoints/ \
        -regx_label=${SERVICE_NAME} \
        -frequency=once \
        -exec_num=3 \
@@ -72,8 +72,6 @@ if [ "$MULTICAST" != "true" ];then
        -v=4 \
        -logtostderr=true \
        -rec_cmd=/elasticsearch/bin/config.sh
-    fi
-
 fi
 
 # Add elasticsearch as command if needed

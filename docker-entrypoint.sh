@@ -11,6 +11,7 @@ export HOST_IP
 MULIT_IP=`ip a | egrep 'eth1|eth0' | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}'`
 MULIT_IP=$(echo $MULIT_IP | sed  's/ /","/g')
 MULIT_IP="[\"${MULIT_IP}\"]"
+export MULIT_IP
 
 # set environment
 export NODE_MASTER=${NODE_MASTER:-true}

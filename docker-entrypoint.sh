@@ -8,9 +8,8 @@ ESCONFIG="elasticsearch.yml"
 HOST_IP=`ip a | grep eth1 | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}'`
 export HOST_IP
 
-MULIT_IP=`ip a | egrep 'eth1|eth0' | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}'`
-MULIT_IP=$(echo $MULIT_IP | sed  's/ /", "/g')
-MULIT_IP="\"${MULIT_IP}\""
+INTER_IP=`ip a | egrep 'eth0' | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}'`
+MULIT_IP="[\"$HOST_IP\", \"$INTER_IP\"]"
 export MULIT_IP
 
 # set environment

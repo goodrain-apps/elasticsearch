@@ -22,8 +22,7 @@ export MULTICAST=${MULTICAST:-true}
 for path in data logs config plugins config/scripts
 do 
     [ ! -d /data/$path/$POD_ORDER ] && \
-    mkdir -pv /data/$path/$POD_ORDER && \
-    chown -R rain:rain /data/$path
+    gosu rain mkdir -pv /data/$path/$POD_ORDER
 done
 
 
@@ -49,12 +48,12 @@ fi
 
 # install discovery-multicast plugin
 installed=`plugin list | grep discovery-multicast`
-[ ! "$installed" ] && cp /tmp/tmp_elasticsearch.yml /elasticsearch/config/ && \
-plugin install  discovery-multicast > /dev/null 2>&1
+[ ! "$installed" ] && gosu rain cp /tmp/tmp_elasticsearch.yml /elasticsearch/config/ && \
+gosu rain plugin install  discovery-multicast > /dev/null 2>&1
 
 # 处理 elasticsearch 配置文件
-[ ! -f ${CONFDIR}/${POD_ORDER}/${ESCONFIG}]  && cp /tmp/${ESCONFIG}  ${CONFDIR}/${POD_ORDER}/${ESCONFIG}
-[ ! -f ${CONFDIR}/${POD_ORDER}/${ESLOGCONFIG}] && cp /tmp/${ESLOGCONFIG} ${CONFDIR}/${POD_ORDER}/${ESLOGCONFIG}
+[ ! -f ${CONFDIR}/${POD_ORDER}/${ESCONFIG}]  && gosu rain cp /tmp/${ESCONFIG}  ${CONFDIR}/${POD_ORDER}/${ESCONFIG}
+[ ! -f ${CONFDIR}/${POD_ORDER}/${ESLOGCONFIG}] && gosu rain cp /tmp/${ESLOGCONFIG} ${CONFDIR}/${POD_ORDER}/${ESLOGCONFIG}
 
 # 软连接 config 目录到 ES_HOME
 if [ -d /elasticsearch/config ];then
@@ -79,7 +78,6 @@ if [ "$MULTICAST" != "true" ];then
 fi
 
 sed -i -r "s/(network.host:) .*/\1 $MULIT_IP/" ${CONFDIR}/${POD_ORDER}/${ESCONFIG}
-#sed -i -r "s/(transport.bind_host:) .*/\1 $HOST_IP/" ${CONFDIR}/${POD_ORDER}/${ESCONFIG}
 
 # Add elasticsearch as command if needed
 if [ "${1:0:1}" = '-' ]; then

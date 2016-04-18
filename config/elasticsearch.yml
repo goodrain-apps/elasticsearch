@@ -4,7 +4,7 @@ cluster.name: ${SERVICE_NAME}
 
 # Network
 http.bind_host: ${MULIT_IP}
-transport.publish_host: ${HOST_IP}
+transport.bind_host: ${HOST_IP}
 
 http.port: 9200
 

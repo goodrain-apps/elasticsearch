@@ -53,8 +53,8 @@ installed=`plugin list | grep discovery-multicast`
 gosu rain plugin install  discovery-multicast > /dev/null 2>&1
 
 # 处理 elasticsearch 配置文件
-[ ! -f "${CONFDIR}/${POD_ORDER}/${ESCONFIG}" ]  && gosu rain cp /tmp/${ESCONFIG}  ${CONFDIR}/${POD_ORDER}/${ESCONFIG}
-[ ! -f "${CONFDIR}/${POD_ORDER}/${ESLOGCONFIG}" ] && gosu rain cp /tmp/${ESLOGCONFIG} ${CONFDIR}/${POD_ORDER}/${ESLOGCONFIG}
+[ ! -f ${CONFDIR}/${POD_ORDER}/${ESCONFIG} ]  && gosu rain cp /tmp/${ESCONFIG}  ${CONFDIR}/${POD_ORDER}/${ESCONFIG}
+[ ! -f ${CONFDIR}/${POD_ORDER}/${ESLOGCONFIG} ] && gosu rain cp /tmp/${ESLOGCONFIG} ${CONFDIR}/${POD_ORDER}/${ESLOGCONFIG}
 
 # 软连接 config 目录到 ES_HOME
 if [ -d /elasticsearch/config ];then

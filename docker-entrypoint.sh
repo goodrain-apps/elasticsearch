@@ -50,13 +50,13 @@ fi
 # install elasticsearch-head
 installed=`plugin list | grep elasticsearch-head`
 [ ! "$installed" ] && gosu rain cp /tmp/tmp_elasticsearch.yml /elasticsearch/config/ && \
-gosu rain plugin install  elasticsearch-head > /dev/null 2>&1
+gosu rain plugin install mobz/elasticsearch-head> /dev/null 2>&1
 
 # install marvel-agent
 installed=`plugin list | grep marvel-agent`
 [ ! "$installed" ] && gosu rain cp /tmp/tmp_elasticsearch.yml /elasticsearch/config/ && \
-gosu rain plugin install license && \
-gosu rain plugin install marvel-agent > /dev/null 2>&1
+gosu rain plugin install file:///tmp/license-${ES_VERSION}.zip && \
+gosu rain plugin install file:///tmp/marvel-agent-${ES_VERSION}.zip > /dev/null 2>&1
 
 
 # 处理 elasticsearch 配置文件

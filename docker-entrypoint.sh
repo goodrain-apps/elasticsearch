@@ -53,10 +53,10 @@ installed=`plugin list | grep elasticsearch-head`
 gosu rain plugin install mobz/elasticsearch-head> /dev/null 2>&1
 
 # install marvel-agent
-installed=`plugin list | grep marvel-agent`
-[ ! "$installed" ] && gosu rain cp /tmp/tmp_elasticsearch.yml /elasticsearch/config/ && \
-gosu rain plugin install file:///tmp/license-${ES_VERSION}.zip && \
-gosu rain plugin install file:///tmp/marvel-agent-${ES_VERSION}.zip > /dev/null 2>&1
+#installed=`plugin list | grep marvel-agent`
+#[ ! "$installed" ] && gosu rain cp /tmp/tmp_elasticsearch.yml /elasticsearch/config/ && \
+#gosu rain plugin install file:///tmp/license-${ES_VERSION}.zip && \
+#gosu rain plugin install file:///tmp/marvel-agent-${ES_VERSION}.zip > /dev/null 2>&1
 
 
 # 处理 elasticsearch 配置文件

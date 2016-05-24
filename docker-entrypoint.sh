@@ -48,9 +48,11 @@ fi
 || ln -s /data/plugins/${POD_ORDER} /elasticsearch/plugins
 
 # install elasticsearch-head
-installed=`plugin list | grep elasticsearch-head`
-[ ! "$installed" ] && gosu rain cp /tmp/tmp_elasticsearch.yml /elasticsearch/config/ && \
-gosu rain plugin install mobz/elasticsearch-head> /dev/null 2>&1
+if [ "$PLUGIN_HEAD" == "true" ];then
+  installed=`plugin list | grep elasticsearch-head`
+  [ ! "$installed" ] && gosu rain cp /tmp/tmp_elasticsearch.yml /elasticsearch/config/ && \
+  gosu rain plugin install mobz/elasticsearch-head> /dev/null 2>&1
+fi
 
 # install marvel-agent
 #installed=`plugin list | grep marvel-agent`

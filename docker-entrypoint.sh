@@ -47,10 +47,17 @@ fi
 && rm -rf /elasticsearch/plugins \
 || ln -s /data/plugins/${POD_ORDER} /elasticsearch/plugins
 
-# install discovery-multicast plugin
-#installed=`plugin list | grep discovery-multicast`
-#[ ! "$installed" ] && gosu rain cp /tmp/tmp_elasticsearch.yml /elasticsearch/config/ && \
-#gosu rain plugin install  discovery-multicast > /dev/null 2>&1
+# install elasticsearch-head
+installed=`plugin list | grep elasticsearch-head`
+[ ! "$installed" ] && gosu rain cp /tmp/tmp_elasticsearch.yml /elasticsearch/config/ && \
+gosu rain plugin install  elasticsearch-head > /dev/null 2>&1
+
+# install marvel-agent
+installed=`plugin list | grep marvel-agent`
+[ ! "$installed" ] && gosu rain cp /tmp/tmp_elasticsearch.yml /elasticsearch/config/ && \
+gosu rain plugin install license && \
+gosu rain plugin install marvel-agent > /dev/null 2>&1
+
 
 # 处理 elasticsearch 配置文件
 [ ! -f "${CONFDIR}/${POD_ORDER}/${ESCONFIG}" ]  && gosu rain cp /tmp/${ESCONFIG}  ${CONFDIR}/${POD_ORDER}/${ESCONFIG}

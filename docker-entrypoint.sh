@@ -80,6 +80,9 @@ fi
 
 sed -i -r "s/(network.host:) .*/\1 $MULIT_IP/" ${CONFDIR}/${POD_ORDER}/${ESCONFIG}
 
+
+sleep ${PAUSE:-0}
+
 # Add elasticsearch as command if needed
 if [ "${1:0:1}" = '-' ]; then
 	set -- elasticsearch "$@"

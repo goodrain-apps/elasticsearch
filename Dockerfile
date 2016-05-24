@@ -15,6 +15,11 @@ RUN apk add  --no-cache curl && \
 # install NodeNetPlugin cluster discovery program
 RUN wget -O /usr/local/bin/NodeNetPlugin "https://github.com/goodrain/NodeNetPlugin/releases/download/${NODENET_VERSION}/NodeNetPlugin" && \
     chmod +x /usr/local/bin/NodeNetPlugin
+    
+# download plugins
+RUN wget -O /tmp/license-${ES_VERSION}.zip "https://download.elastic.co/elasticsearch/release/org/elasticsearch/plugin/license/${ES_VERSION}/license-${ES_VERSION}.zip" && \
+    wget -O /tmp/marvel-agent-${ES_VERSION}.zip "https://download.elastic.co/elasticsearch/release/org/elasticsearch/plugin/marvel-agent/${ES_VERSION}/marvel-agent-${ES_VERSION}.zip"
+
 
 ENV PATH /elasticsearch/bin:$PATH
 

@@ -22,8 +22,6 @@ node:
 http:
   enabled: ${HTTP_ENABLE}
   compression: true
-  cors:
-    enabled: true
 
 # Paths
 path:

@@ -19,6 +19,9 @@ export HTTP_ENABLE=${HTTP_ENABLE:-true}
 export MULTICAST=${MULTICAST:-true}
 export LOG_LEVEL=${LOG_LEVEL:-1}
 
+# 清理旧input配置文件
+find  $CONFDIR  -name '*_input.conf' -delete
+
 # 初始化创建目录
 for path in data logs config plugins config/scripts
 do 

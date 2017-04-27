@@ -5,7 +5,7 @@
 CONFDIR="/data/config"
 ESLOGCONFIG="logging.yml"
 ESCONFIG="elasticsearch.yml"
-HOST_IP=$(ip -o -4 addr list eth1 | awk '{print $4}' | cut -d/ -f1)
+HOST_IP=$(ip -o -4 addr list eth0 | awk '{print $4}' | cut -d/ -f1)
 export HOST_IP
 
 INTER_IP=$(ip -o -4 addr list eth0 | awk '{print $4}' | cut -d/ -f1)
